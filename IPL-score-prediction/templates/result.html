@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>First Innings Score Predictor</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='ipl-favicon.ico') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://kit.fontawesome.com/5f3f547070.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            background-color: #544ea6;
+            color: white;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+        }
+
+        div[class*=box] {
+            height: 33.33%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box-1 {
+            background-color: #544ea6;
+        }
+
+
+        .btn {
+            line-height: 50px;
+            height: 50px;
+            text-align: center;
+            width: 150px;
+            cursor: pointer;
+        }
+
+        .btn-one {
+            color: #FFF;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .btn-one span {
+            transition: all 0.3s;
+        }
+
+        .btn-one::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0;
+            transition: all 0.3s;
+            border-top-width: 1px;
+            border-bottom-width: 1px;
+            border-top-style: solid;
+            border-bottom-style: solid;
+            border-top-color: rgba(255, 255, 255, 0.5);
+            border-bottom-color: rgba(255, 255, 255, 0.5);
+            transform: scale(0.1, 1);
+        }
+
+        .btn-one:hover span {
+            letter-spacing: 2px;
+        }
+
+        .btn-one:hover::before {
+            opacity: 1;
+            transform: scale(1, 1);
+        }
+
+        .btn-one::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            transition: all 0.3s;
+            background-color: rgba(213, 213, 213, 0.1);
+        }
+
+        .btn-one:hover::after {
+            opacity: 0;
+            transform: scale(0.1, 1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Website Title -->
+    <!-- Website Title -->
+    <div class="container" style="padding-top:100px;padding-bottom:109px;color: white;">
+        <h2 class='container-heading'><span class="heading_second">Indian Premier League Score Predictor</span></h2>
+        <div class='description'>
+            <p>Made by Akash Rao and Amogha Mayya</p>
+
+        </div>
+
+    </div>
+
+
+    <!-- Prediction Area -->
+    <div class="prediction-area">
+
+        <!-- IPL Banner - 1 -->
+        <div class='ipl-banner-left'>
+
+            <div class="slider-frame">
+                <div class="slide-images-up">
+
+                    <!-- Image-1 -->
+                    <div class="image-container">
+                        <img class="image-width" src="{{ url_for('static', filename='mi.jpg') }}" alt="Mumbai Indians">
+                    </div>
+                    <!-- Image-2 -->
+                    <div class="image-container">
+                        <img class="image-width" src="{{ url_for('static', filename='srh.png') }}"
+                            alt="Sunrisers Hyderabad">
+                    </div>
+                    <!-- Image-3 -->
+                    <div class="image-container">
+                        <img class="image-width" src="{{ url_for('static', filename='rcb.png') }}"
+                            alt="Royal Challengers Bangalore">
+                    </div>
+                    <!-- Image-4 -->
+                    <div class="image-container">
+                        <img class="image-width" src="{{ url_for('static', filename='dc.png') }}" alt="Delhi Capitals">
+                    </div>
+                    <!-- Image-5 -->
+                    <div class="image-container">
+                        <img class="image-width" src="{{ url_for('static', filename='rr.png') }}"
+                            alt="Rajasthan Royals">
+                    </div>
+                    <!-- Image-6 -->
+                    <div class="image-container">
+                        <img class="image-width" src="{{ url_for('static', filename='kkr.jpg') }}"
+                            alt="Kolkata Knight Riders">
+                    </div>
+                    <!-- Image-7 -->
+                    <div class="image-container">
+                        <img class="image-width" src="{{ url_for('static', filename='kxip.png') }}"
+                            alt="Kings XI Punjab">
+                    </div>
+                    <!-- Image-8 -->
+                    <div class="image-container">
+                        <img class="image-width" src="{{ url_for('static', filename='csk.png') }}"
+                            alt="Chennai Super Kings">
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <!-- Result -->
+        <div class="results" style="margin-left:450px;">
+            <h2 class='result-p'>Final predicted score: {{ lower_limit }} to {{ upper_limit }}</h>
+        </div>
+
+        <a href="http://localhost:8501/" style="margin-top:175px; padding-right: 400px;  text-decoration: none;">
+
+            <div class="box-1">
+                <div class="btn btn-one">
+                    <span>Player Stats</span>
+                </div>
+            </div>
+            <!-- <button>Player Stats</button> -->
+        </a>
+
+        <!-- IPL Banner - 2 -->
+        <div class='ipl-banner-right'>
+
+            <div class="slider-frame">
+                <div class="slide-images-down">
+
+                    <!-- Image-1 -->
+                    <div class="image-container">
+                        <img class="image-width" src="{{ url_for('static', filename='mi.jpg') }}" alt="Mumbai Indians">
+                    </div>
+                    <!-- Image-2 -->
+                    <div class="image-container">
+                        <img class="image-width" src="{{ url_for('static', filename='srh.png') }}"
+                            alt="Sunrisers Hyderabad">
+                    </div>
+                    <!-- Image-3 -->
+                    <div class="image-container">
+                        <img class="image-width" src="{{ url_for('static', filename='rcb.png') }}"
+                            alt="Royal Challengers Bangalore">
+                    </div>
+                    <!-- Image-4 -->
+                    <div class="image-container">
+                        <img class="image-width" src="{{ url_for('static', filename='dc.png') }}" alt="Delhi Capitals">
+                    </div>
+                    <!-- Image-5 -->
+                    <div class="image-container">
+                        <img class="image-width" src="{{ url_for('static', filename='kkr.jpg') }}"
+                            alt="Kolkata Knight Riders">
+                    </div>
+                    <!-- Image-6 -->
+                    <div class="image-container">
+                        <img class="image-width" src="{{ url_for('static', filename='rr.png') }}"
+                            alt="Rajasthan Royals">
+                    </div>
+                    <!-- Image-7 -->
+                    <div class="image-container">
+                        <img class="image-width" src="{{ url_for('static', filename='kxip.png') }}"
+                            alt="Kings XI Punjab">
+                    </div>
+                    <!-- Image-8 -->
+                    <div class="image-container">
+                        <img class="image-width" src="{{ url_for('static', filename='csk.png') }}"
+                            alt="Chennai Super Kings">
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
